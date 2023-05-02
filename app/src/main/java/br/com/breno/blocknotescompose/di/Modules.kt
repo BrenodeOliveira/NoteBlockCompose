@@ -38,7 +38,9 @@ val domainModule = module {
 }
 
 val presentationModule = module {
-    viewModel<MainViewModel>()
+    viewModel {
+        MainViewModel(fetchNotes = get())
+    }
 
     viewModel<AddNoteViewModel>()
 }

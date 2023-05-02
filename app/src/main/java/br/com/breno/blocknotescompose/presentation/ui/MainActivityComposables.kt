@@ -1,16 +1,15 @@
 package br.com.breno.blocknotescompose.presentation.ui
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.progressSemantics
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -55,7 +54,12 @@ fun LazyList(notes: List<NoteModel>) {
 }
 
 @Composable
-fun HomeContent(onClickAction: () -> Unit, notes: List<NoteModel>) {
+fun HomeContent(
+    onClickAction: () -> Unit,
+    notes: List<NoteModel>,
+    isVisible: Boolean,
+    errorScreen: Boolean
+) {
     Scaffold(
         topBar = {
             TopAppBar(title = { Text("Bloco de notas") })
@@ -76,7 +80,39 @@ fun HomeContent(onClickAction: () -> Unit, notes: List<NoteModel>) {
             it
             Surface {
                 LazyList(notes = notes)
+                ProgressBar(isVisible = isVisible)
+                ErrorScreen(errorScreen = errorScreen)
             }
         }
     )
+}
+
+@Composable
+fun ProgressBar(isVisible: Boolean) {
+    if (isVisible) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            CircularProgressIndicator(
+                modifier = Modifier
+                    .progressSemantics()
+                    .size(64.dp),
+            )
+        }
+    }
+}
+
+@Composable
+fun ErrorScreen(errorScreen: Boolean) {
+    if (errorScreen) {
+        Column(
+            modifier = Modifier.fillMaxSize(),
+            horizontalAlignment = CenterHorizontally,
+            verticalArrangement = Arrangement.Center,
+        ) {
+            Text(text = "Deu erro para carregar a página")
+        }
+    }
 }

@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy.IGNORE
 import androidx.room.Query
 import br.com.breno.blocknotescompose.data.model.NoteModel
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface NoteDao {
@@ -13,5 +14,5 @@ interface NoteDao {
     suspend fun insertNote(note: NoteModel): Long
 
     @Query("SELECT * FROM noteList")
-    suspend fun getAllNotes(): List<NoteModel>
+    fun getAllNotes(): Flow<List<NoteModel>>
 }

@@ -19,7 +19,9 @@ class MainActivity : ComponentActivity() {
             BlockNotesComposeTheme {
                 HomeContent(
                     onClickAction = mainViewModel::navigateToInsert,
-                    notes = mainViewModel.listNote.value
+                    notes = mainViewModel.listNote.value,
+                    isVisible = mainViewModel.loading.value,
+                    errorScreen = mainViewModel.errorScreen.value
                 )
             }
         }

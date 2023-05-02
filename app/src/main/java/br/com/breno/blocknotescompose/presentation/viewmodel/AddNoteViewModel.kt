@@ -11,7 +11,7 @@ class AddNoteViewModel(private val useCase: AddNoteUseCase) : ViewModel() {
     fun insertNote(title: String, subtitle: String) {
         val noteInserted = stringToModel(title, subtitle)
         viewModelScope.launch {
-            useCase.invoke(noteInserted)
+            useCase(noteInserted)
         }
     }
 
