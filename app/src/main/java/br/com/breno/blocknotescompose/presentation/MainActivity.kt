@@ -14,19 +14,20 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        mainViewModel.getAllNotes()
-
         getObservables()
-
         setContent {
             BlockNotesComposeTheme {
                 HomeContent(
                     onClickAction = mainViewModel::navigateToInsert,
-                    mainViewModel.listNote.value
+                    notes = mainViewModel.listNote.value
                 )
             }
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        mainViewModel.getAllNotes()
     }
 
     private fun getObservables() {
