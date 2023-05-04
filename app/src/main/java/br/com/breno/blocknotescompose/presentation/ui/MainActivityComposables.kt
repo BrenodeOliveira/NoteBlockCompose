@@ -16,6 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.breno.blocknotescompose.data.model.NoteModel
+import br.com.breno.blocknotescompose.presentation.viewmodel.action.MainViewAction
 
 @Composable
 fun CardBlock(noteModel: NoteModel) {
@@ -42,13 +43,15 @@ fun CardBlock(noteModel: NoteModel) {
 
 @Composable
 fun LazyList(notes: List<NoteModel>) {
-    LazyColumn(
-        Modifier
-            .fillMaxSize()
-            .padding(16.dp)
-    ) {
-        items(notes) {
-            CardBlock(noteModel = it)
+    Surface {
+        LazyColumn(
+            Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            items(notes) {
+                CardBlock(noteModel = it)
+            }
         }
     }
 }
@@ -56,9 +59,7 @@ fun LazyList(notes: List<NoteModel>) {
 @Composable
 fun HomeContent(
     onClickAction: () -> Unit,
-    notes: List<NoteModel>,
-    isVisible: Boolean,
-    errorScreen: Boolean
+    viewAction: MainViewAction
 ) {
     Scaffold(
         topBar = {
@@ -75,31 +76,33 @@ fun HomeContent(
                     )
                 }
             )
-        },
-        content = {
-            it
-            Surface {
-                LazyList(notes = notes)
-                ProgressBar(isVisible = isVisible)
-                ErrorScreen(errorScreen = errorScreen)
-            }
         }
-    )
+    ) {
+        it
+        when (viewAction) {
+            is MainViewAction.ListNotes -> LazyList(notes = viewAction.list)
+            is MainViewAction.LoadingState -> ProgressBar(isVisible = viewAction.isLoading)
+            is MainViewAction.ErrorScreen -> ErrorScreen(errorScreen = viewAction.errorScreen)
+            else -> Unit
+        }
+    }
 }
 
 @Composable
 fun ProgressBar(isVisible: Boolean) {
     if (isVisible) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
-            CircularProgressIndicator(
-                modifier = Modifier
-                    .progressSemantics()
-                    .size(64.dp),
-            )
+        Surface {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            ) {
+                CircularProgressIndicator(
+                    modifier = Modifier
+                        .progressSemantics()
+                        .size(64.dp),
+                )
+            }
         }
     }
 }
@@ -107,12 +110,14 @@ fun ProgressBar(isVisible: Boolean) {
 @Composable
 fun ErrorScreen(errorScreen: Boolean) {
     if (errorScreen) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Text(text = "Deu erro para carregar a página")
+        Surface {
+            Column(
+                modifier = Modifier.fillMaxSize(),
+                horizontalAlignment = CenterHorizontally,
+                verticalArrangement = Arrangement.Center,
+            ) {
+                Text(text = "Deu erro para carregar a página")
+            }
         }
     }
 }

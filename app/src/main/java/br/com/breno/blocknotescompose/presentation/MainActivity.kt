@@ -3,9 +3,11 @@ package br.com.breno.blocknotescompose.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.runtime.collectAsState
 import br.com.breno.blocknotescompose.presentation.theme.BlockNotesComposeTheme
 import br.com.breno.blocknotescompose.presentation.ui.HomeContent
 import br.com.breno.blocknotescompose.presentation.viewmodel.MainViewModel
+import br.com.breno.blocknotescompose.presentation.viewmodel.action.MainViewAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -19,9 +21,7 @@ class MainActivity : ComponentActivity() {
             BlockNotesComposeTheme {
                 HomeContent(
                     onClickAction = mainViewModel::navigateToInsert,
-                    notes = mainViewModel.listNote.value,
-                    isVisible = mainViewModel.loading.value,
-                    errorScreen = mainViewModel.errorScreen.value
+                    viewAction = mainViewModel.state.collectAsState().value
                 )
             }
         }
@@ -33,8 +33,15 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun getObservables() {
-        mainViewModel.navigate.observe(this) {
-            if (it) AddNoteActivity.newIntent(this)
+        mainViewModel.actions.observe(this) { action ->
+            when (action) {
+                is MainViewAction.NavigateToInsert -> navigateToInsert()
+                else -> Unit
+            }
         }
+    }
+
+    private fun navigateToInsert() {
+        AddNoteActivity.newIntent(this)
     }
 }

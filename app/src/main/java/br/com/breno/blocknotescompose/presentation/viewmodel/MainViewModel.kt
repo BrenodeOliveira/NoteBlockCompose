@@ -1,13 +1,11 @@
 package br.com.breno.blocknotescompose.presentation.viewmodel
 
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import br.com.breno.blocknotescompose.data.model.NoteModel
 import br.com.breno.blocknotescompose.domain.usecase.FetchNotesUseCase
+import br.com.breno.blocknotescompose.presentation.viewmodel.action.MainViewAction
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -18,26 +16,26 @@ class MainViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
-    private val _navigate: MutableLiveData<Boolean> = MutableLiveData()
-    val navigate: LiveData<Boolean> = _navigate
-    val listNote: MutableState<List<NoteModel>> = mutableStateOf(ArrayList())
-    val loading: MutableState<Boolean> = mutableStateOf(false)
-    val errorScreen: MutableState<Boolean> = mutableStateOf(false)
+    private val mutableState = MutableStateFlow<MainViewAction>(MainViewAction.NavigateToInsert)
+    val state = mutableState.asStateFlow()
+
+    private val _actions: MutableLiveData<MainViewAction> = MutableLiveData()
+    val actions: LiveData<MainViewAction> = _actions
 
     fun getAllNotes() {
         viewModelScope.launch {
             fetchNotes()
                 .flowOn(dispatcher)
-                .onStart { loading.value = true }
-                .catch { errorScreen.value = true }
+                .onStart { mutableState.value = MainViewAction.LoadingState(true) }
+                .catch { mutableState.value = MainViewAction.ErrorScreen(true) }
+                .onCompletion { mutableState.value = MainViewAction.LoadingState(false) }
                 .collect{
-                    loading.value = false
-                    listNote.value = it
+                    mutableState.value = MainViewAction.ListNotes(it)
                 }
         }
     }
 
     fun navigateToInsert() {
-        _navigate.value = true
+        _actions.value = MainViewAction.NavigateToInsert
     }
 }
