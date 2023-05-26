@@ -16,8 +16,8 @@ class MainViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
-    private val mutableState = MutableStateFlow<MainViewAction>(MainViewAction.NavigateToInsert)
-    val state = mutableState.asStateFlow()
+    private val _mutableState = MutableStateFlow<MainViewAction>(MainViewAction.NavigateToInsert)
+    val state = _mutableState.asStateFlow()
 
     private val _actions: MutableLiveData<MainViewAction> = MutableLiveData()
     val actions: LiveData<MainViewAction> = _actions
@@ -26,11 +26,11 @@ class MainViewModel(
         viewModelScope.launch {
             fetchNotes()
                 .flowOn(dispatcher)
-                .onStart { mutableState.value = MainViewAction.LoadingState(true) }
-                .catch { mutableState.value = MainViewAction.ErrorScreen(true) }
-                .onCompletion { mutableState.value = MainViewAction.LoadingState(false) }
+                .onStart { _mutableState.value = MainViewAction.LoadingState(true) }
+                .catch { _mutableState.value = MainViewAction.ErrorScreen(true) }
+                .onCompletion { _mutableState.value = MainViewAction.LoadingState(false) }
                 .collect{
-                    mutableState.value = MainViewAction.ListNotes(it)
+                    _mutableState.value = MainViewAction.ListNotes(it)
                 }
         }
     }

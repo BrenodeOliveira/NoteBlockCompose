@@ -9,6 +9,7 @@ import br.com.breno.blocknotescompose.domain.usecase.AddNoteUseCase
 import br.com.breno.blocknotescompose.domain.usecase.FetchNotesUseCase
 import br.com.breno.blocknotescompose.presentation.viewmodel.AddNoteViewModel
 import br.com.breno.blocknotescompose.presentation.viewmodel.MainViewModel
+import br.com.breno.blocknotescompose.presentation.viewmodel.TestViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -43,4 +44,6 @@ val presentationModule = module {
     }
 
     viewModel<AddNoteViewModel>()
+
+    viewModel<TestViewModel>()
 }
