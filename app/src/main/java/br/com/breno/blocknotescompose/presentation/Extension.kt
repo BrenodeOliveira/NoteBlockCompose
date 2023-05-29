@@ -1,15 +1,11 @@
 package br.com.breno.blocknotescompose.presentation
 
 import androidx.activity.ComponentActivity
-import androidx.lifecycle.lifecycleScope
+import br.com.breno.blocknotescompose.presentation.viewmodel.TestViewModel
 import core.action.UIAction
-import core.viewmodel.ActionViewModel
-import kotlinx.coroutines.launch
 
-fun ComponentActivity.onAction(viewModel: ActionViewModel<UIAction>) {
-    lifecycleScope.launch {
-        viewModel.singleShot().observe(this@onAction) {
-            it
-        }
+fun ComponentActivity.onAction(viewModel: TestViewModel, action: (UIAction) -> Unit) {
+    viewModel.singleShot().observe(this) {
+        action.invoke(it)
     }
 }

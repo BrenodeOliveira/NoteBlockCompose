@@ -9,6 +9,7 @@ import br.com.breno.blocknotescompose.presentation.ui.HomeContent
 import br.com.breno.blocknotescompose.presentation.viewmodel.MainViewModel
 import br.com.breno.blocknotescompose.presentation.viewmodel.TestViewModel
 import br.com.breno.blocknotescompose.presentation.viewmodel.action.MainViewAction
+import br.com.breno.blocknotescompose.presentation.viewmodel.action.TestViewAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
@@ -19,13 +20,21 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getObservables()
+        getActionObserver()
         setContent {
-            //mainViewModel::navigateToInsert,
             BlockNotesComposeTheme {
                 HomeContent(
                     onClickAction = testViewModel::teste,
                     viewAction = mainViewModel.state.collectAsState().value
                 )
+            }
+        }
+    }
+
+    private fun getActionObserver() {
+        onAction(testViewModel) { action ->
+            when (action) {
+                is TestViewAction.Test1 -> navigateToInsert()
             }
         }
     }
@@ -36,11 +45,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun getObservables() {
-//        onAction(testViewModel) { action ->
-//            when(action) {
-//                is TestViewAction.Test1 -> navigateToInsert()
-//            }
-//        }
         mainViewModel.actions.observe(this) { action ->
             when (action) {
                 is MainViewAction.NavigateToInsert -> navigateToInsert()

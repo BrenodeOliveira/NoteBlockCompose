@@ -11,6 +11,6 @@ open class ActionViewModel<uiAction: UIAction>: ViewModel() {
     fun singleShot() : LiveData<UIAction> = _singleShotEvent
 
     fun sendAction(uiAction: UIAction) {
-        this._singleShotEvent.value = uiAction
+        _singleShotEvent.value = uiAction
     }
 }
