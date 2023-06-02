@@ -1,11 +1,15 @@
 package br.com.breno.blocknotescompose.presentation
 
 import androidx.activity.ComponentActivity
-import br.com.breno.blocknotescompose.presentation.viewmodel.TestViewModel
 import core.action.UIAction
+import core.viewmodel.ActionViewModel
 
-fun ComponentActivity.onAction(viewModel: TestViewModel, action: (UIAction) -> Unit) {
+fun ComponentActivity.onAction(
+    viewModel: ActionViewModel<*>,
+    action: (UIAction) -> Unit
+) {
     viewModel.singleShot().observe(this) {
-        action.invoke(it)
+        action(it)
     }
 }
+
