@@ -6,26 +6,26 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.collectAsState
 import br.com.breno.blocknotescompose.presentation.theme.BlockNotesComposeTheme
 import br.com.breno.blocknotescompose.presentation.ui.HomeContent
-import br.com.breno.blocknotescompose.presentation.viewmodel.MainViewModel
-import br.com.breno.blocknotescompose.presentation.viewmodel.TestViewModel
-import br.com.breno.blocknotescompose.presentation.viewmodel.action.MainViewAction
-import br.com.breno.blocknotescompose.presentation.viewmodel.action.TestViewAction
+import br.com.breno.blocknotescompose.presentation.viewmodel.HomeViewModel
+import br.com.breno.blocknotescompose.presentation.viewmodel.action.HomeViewAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val mainViewModel: MainViewModel by viewModel()
-    private val testViewModel: TestViewModel by viewModel()
+    private val testViewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getObservables()
         getActionObserver()
+        setComposeContents()
+    }
+
+    private fun setComposeContents() {
         setContent {
             BlockNotesComposeTheme {
                 HomeContent(
-                    onClickAction = testViewModel::teste,
-                    viewAction = mainViewModel.state.collectAsState().value
+                    onClickAction = testViewModel::navigateToInsertTest,
+                    viewAction = testViewModel.state.collectAsState().value
                 )
             }
         }
@@ -34,23 +34,14 @@ class MainActivity : ComponentActivity() {
     private fun getActionObserver() {
         onAction(testViewModel) { action ->
             when (action) {
-                is TestViewAction.Test1 -> navigateToInsert()
+                is HomeViewAction.NavigateToInsert -> navigateToInsert()
             }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        mainViewModel.getAllNotes()
-    }
-
-    private fun getObservables() {
-        mainViewModel.actions.observe(this) { action ->
-            when (action) {
-                is MainViewAction.NavigateToInsert -> navigateToInsert()
-                else -> Unit
-            }
-        }
+        testViewModel.getAllNotesTest()
     }
 
     private fun navigateToInsert() {

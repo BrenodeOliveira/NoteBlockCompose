@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import core.action.UIAction
 
 open class ActionViewModel<uiAction: UIAction>: ViewModel() {
+    //Action with LiveData
     private val _singleShotEvent: MutableLiveData<UIAction> = MutableLiveData()
 
     fun singleShot() : LiveData<UIAction> = _singleShotEvent

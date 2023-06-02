@@ -16,7 +16,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.breno.blocknotescompose.data.model.NoteModel
-import br.com.breno.blocknotescompose.presentation.viewmodel.action.MainViewAction
+import br.com.breno.blocknotescompose.presentation.viewmodel.action.HomeViewAction
 
 @Composable
 fun CardBlock(noteModel: NoteModel) {
@@ -59,7 +59,7 @@ fun LazyList(notes: List<NoteModel>) {
 @Composable
 fun HomeContent(
     onClickAction: () -> Unit,
-    viewAction: MainViewAction
+    viewAction: HomeViewAction
 ) {
     Scaffold(
         topBar = {
@@ -80,9 +80,9 @@ fun HomeContent(
     ) {
         it
         when (viewAction) {
-            is MainViewAction.ListNotes -> LazyList(notes = viewAction.list)
-            is MainViewAction.LoadingState -> ProgressBar(isVisible = viewAction.isLoading)
-            is MainViewAction.ErrorScreen -> ErrorScreen(errorScreen = viewAction.errorScreen)
+            is HomeViewAction.ListNotes -> LazyList(notes = viewAction.list)
+            is HomeViewAction.LoadingState -> ProgressBar(isVisible = viewAction.isLoading)
+            is HomeViewAction.ErrorScreen -> ErrorScreen(errorScreen = viewAction.errorScreen)
             else -> Unit
         }
     }
