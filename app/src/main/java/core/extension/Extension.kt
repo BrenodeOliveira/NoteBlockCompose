@@ -1,4 +1,4 @@
-package br.com.breno.blocknotescompose.presentation
+package core.extension
 
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable

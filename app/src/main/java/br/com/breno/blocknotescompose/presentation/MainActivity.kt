@@ -7,6 +7,8 @@ import br.com.breno.blocknotescompose.presentation.theme.BlockNotesComposeTheme
 import br.com.breno.blocknotescompose.presentation.ui.HomeContent
 import br.com.breno.blocknotescompose.presentation.viewmodel.HomeViewModel
 import br.com.breno.blocknotescompose.presentation.viewmodel.action.HomeViewAction
+import core.extension.onAction
+import core.extension.onComposable
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
