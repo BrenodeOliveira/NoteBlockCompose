@@ -3,7 +3,6 @@ package br.com.breno.blocknotescompose.presentation
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.runtime.collectAsState
 import br.com.breno.blocknotescompose.presentation.theme.BlockNotesComposeTheme
 import br.com.breno.blocknotescompose.presentation.ui.HomeContent
 import br.com.breno.blocknotescompose.presentation.viewmodel.HomeViewModel
@@ -12,27 +11,23 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : ComponentActivity() {
 
-    private val testViewModel: HomeViewModel by viewModel()
+    private val homeViewModel: HomeViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getActionObserver()
-        setComposeContents()
-    }
-
-    private fun setComposeContents() {
         setContent {
             BlockNotesComposeTheme {
                 HomeContent(
-                    onClickAction = testViewModel::navigateToInsertTest,
-                    viewAction = testViewModel.state.collectAsState().value
+                    onClickAction = homeViewModel::navigateToInsert,
+                    viewAction = onComposable(homeViewModel)
                 )
             }
         }
     }
 
     private fun getActionObserver() {
-        onAction(testViewModel) { action ->
+        onAction(homeViewModel) { action ->
             when (action) {
                 is HomeViewAction.NavigateToInsert -> navigateToInsert()
             }
@@ -41,7 +36,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onResume() {
         super.onResume()
-        testViewModel.getAllNotesTest()
+        homeViewModel.getAllNotes()
     }
 
     private fun navigateToInsert() {

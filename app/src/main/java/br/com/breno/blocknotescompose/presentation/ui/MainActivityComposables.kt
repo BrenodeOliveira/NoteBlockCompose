@@ -17,6 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.breno.blocknotescompose.data.model.NoteModel
 import br.com.breno.blocknotescompose.presentation.viewmodel.action.HomeViewAction
+import core.action.UIAction
 
 @Composable
 fun CardBlock(noteModel: NoteModel) {
@@ -59,7 +60,7 @@ fun LazyList(notes: List<NoteModel>) {
 @Composable
 fun HomeContent(
     onClickAction: () -> Unit,
-    viewAction: HomeViewAction
+    viewAction: UIAction
 ) {
     Scaffold(
         topBar = {
@@ -83,7 +84,6 @@ fun HomeContent(
             is HomeViewAction.ListNotes -> LazyList(notes = viewAction.list)
             is HomeViewAction.LoadingState -> ProgressBar(isVisible = viewAction.isLoading)
             is HomeViewAction.ErrorScreen -> ErrorScreen(errorScreen = viewAction.errorScreen)
-            else -> Unit
         }
     }
 }

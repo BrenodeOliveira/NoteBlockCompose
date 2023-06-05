@@ -14,23 +14,20 @@ class HomeViewModel(
     private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ActionViewModel<HomeViewAction>() {
 
-    private val _mutableState = MutableStateFlow<HomeViewAction>(HomeViewAction.NavigateToInsert)
-    val state = _mutableState.asStateFlow()
-
-    fun getAllNotesTest() {
+    fun getAllNotes() {
         viewModelScope.launch {
             fetchNotes()
                 .flowOn(dispatcher)
-                .onStart { _mutableState.value = HomeViewAction.LoadingState(true)  }
-                .catch { _mutableState.value = HomeViewAction.ErrorScreen(true) }
-                .onCompletion { _mutableState.value = HomeViewAction.LoadingState(false) }
+                .onStart { sendComposable(HomeViewAction.LoadingState(true))  }
+                .catch { sendComposable(HomeViewAction.ErrorScreen(true)) }
+                .onCompletion { sendComposable(HomeViewAction.LoadingState(false)) }
                 .collect{
-                    _mutableState.value = HomeViewAction.ListNotes(it)
+                    sendComposable(HomeViewAction.ListNotes(it))
                 }
         }
     }
 
-    fun navigateToInsertTest() {
+    fun navigateToInsert() {
         sendAction(HomeViewAction.NavigateToInsert)
     }
 }
