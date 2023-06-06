@@ -10,6 +10,8 @@ import androidx.compose.runtime.mutableStateOf
 import br.com.breno.blocknotescompose.presentation.theme.BlockNotesComposeTheme
 import br.com.breno.blocknotescompose.presentation.ui.AddNoteContent
 import br.com.breno.blocknotescompose.presentation.viewmodel.AddNoteViewModel
+import br.com.breno.blocknotescompose.presentation.viewmodel.action.AddNoteViewAction
+import core.extension.onAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddNoteActivity : ComponentActivity() {
@@ -21,12 +23,20 @@ class AddNoteActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        getObservables()
         setContent {
             BlockNotesComposeTheme {
                 AddNoteContent(newTitle = title, newSubtitle = subtitle) {
                     viewModel.insertNote(title = title.value, subtitle = subtitle.value)
-                    finish()
                 }
+            }
+        }
+    }
+
+    private fun getObservables() {
+        onAction(viewModel) { action ->
+            when (action) {
+                is AddNoteViewAction.Finish -> finish()
             }
         }
     }
