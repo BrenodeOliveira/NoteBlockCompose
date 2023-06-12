@@ -18,7 +18,7 @@ class HomeViewModel(
         viewModelScope.launch {
             fetchNotes()
                 .flowOn(dispatcher)
-                .onStart { sendComposable(HomeViewAction.LoadingState(true))  }
+                .onStart { sendComposable(HomeViewAction.LoadingState(true)) }
                 .catch { sendComposable(HomeViewAction.ErrorScreen(true)) }
                 .onCompletion { sendComposable(HomeViewAction.LoadingState(false)) }
                 .collect{
