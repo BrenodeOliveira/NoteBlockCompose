@@ -10,23 +10,32 @@ import org.junit.rules.ExternalResource
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelTestRule(
-    actionObserver: Observer<UIAction> = mockk()
+    actionObserver: Observer<UIAction> = mockk(),
+    composeObserver: Observer<UIAction> = mockk(),
 ) : ExternalResource() {
-    private val factory = TestLiveDataFactory(actionObserver)
+    private val actionFactory = TestLiveDataFactory(actionObserver, composeObserver)
 
     fun <T : UIAction> getActionObserver(): Observer<T> {
         try {
-            return factory.actionObserver as Observer<T>
+            return actionFactory.actionObserver as Observer<T>
+        } catch (e: UninitializedPropertyAccessException) {
+            throw Throwable("Not initialized")
+        }
+    }
+
+    fun <T : UIAction> getComposeObserver(): Observer<T> {
+        try {
+            return actionFactory.composeObserver as Observer<T>
         } catch (e: UninitializedPropertyAccessException) {
             throw Throwable("Not initialized")
         }
     }
 
     override fun before() {
-        ViewModelPlugin.setFactoryPlugin(factory)
+        ViewModelPlugin.setActionFactoryPlugin(actionFactory)
     }
 
     override fun after() {
-        ViewModelPlugin.setFactoryPlugin(DefaultLiveDataFactory())
+        ViewModelPlugin.setActionFactoryPlugin(DefaultLiveDataFactory())
     }
 }

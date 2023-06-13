@@ -2,7 +2,6 @@ package core.extension
 
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import core.action.UIAction
 import core.viewmodel.ActionViewModel
 
@@ -17,5 +16,5 @@ fun ComponentActivity.onAction(
 
 @Composable
 fun ComponentActivity.onComposable(viewModel: ActionViewModel<*>) =
-    viewModel.singleShotCompose().collectAsState().value
+    viewModel.singleShotCompose().value
 
