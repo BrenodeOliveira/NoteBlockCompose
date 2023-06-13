@@ -1,4 +1,3 @@
-
 package br.com.breno.blocknotescompose.presentation.viewmodel
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -57,12 +56,14 @@ class HomeViewModelTest {
     fun `getAllNotes Should receive notes When is called`() {
         // Given
         val listNotes = listOf<NoteModel>()
-        coEvery  { fetchNotes() } returns flowOf(listNotes)
+        coEvery { fetchNotes() } returns flowOf(listNotes)
         // When
         viewModel.getAllNotes()
         // Then
         verify {
             composeObserver.onChanged(HomeViewAction.LoadingState(isLoading = true))
+            composeObserver.onChanged(HomeViewAction.LoadingState(isLoading = false))
+            composeObserver.onChanged(HomeViewAction.ListNotes(listNotes))
         }
     }
 }
