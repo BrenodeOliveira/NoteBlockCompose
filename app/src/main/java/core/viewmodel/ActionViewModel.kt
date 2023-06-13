@@ -3,17 +3,15 @@ package core.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import core.action.ComposableAction
 import core.action.UIAction
 import core.plugins.ViewModelPlugin
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 open class ActionViewModel<uiAction : UIAction> : ViewModel() {
     //Action with LiveData
     private val _singleShotEvent: MutableLiveData<UIAction> =
-        ViewModelPlugin.factory.createMutableLiveData()
+        ViewModelPlugin.actionFactory.createMutableLiveData()
 
     fun singleShot(): LiveData<UIAction> = _singleShotEvent
 
@@ -22,7 +20,7 @@ open class ActionViewModel<uiAction : UIAction> : ViewModel() {
     }
 
     //Composables single shot
-    private val _mutableState = MutableStateFlow<UIAction>(ComposableAction.InitializingCompose)
+    private val _mutableState = ViewModelPlugin.composeFactory.createMutableStateFlow()
 
     fun singleShotCompose(): StateFlow<UIAction> = _mutableState.asStateFlow()
 

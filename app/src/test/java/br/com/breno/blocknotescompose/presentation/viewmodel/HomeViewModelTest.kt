@@ -25,7 +25,8 @@ class HomeViewModelTest {
 
     @get:Rule
     val viewModelTestRule = ViewModelTestRule(
-        actionObserver = mockk(relaxed = true)
+        actionObserver = mockk(relaxed = true),
+        composeObserver = mockk(relaxed = true)
     )
 
     @get:Rule
@@ -33,6 +34,7 @@ class HomeViewModelTest {
 
     private val fetchNotes = mockk<FetchNotesUseCase>(relaxed = true)
     private val actionObserver: Observer<HomeViewAction> = viewModelTestRule.getActionObserver()
+    private val composeObserver: Observer<HomeViewAction> = viewModelTestRule.getComposeObserver()
     private lateinit var viewModel: HomeViewModel
     private val dispatcher = Dispatchers.Unconfined
 
@@ -60,7 +62,7 @@ class HomeViewModelTest {
         viewModel.getAllNotes()
         // Then
         verify {
-            // to be implemented
+            composeObserver.onChanged(HomeViewAction.LoadingState(isLoading = true))
         }
     }
 }

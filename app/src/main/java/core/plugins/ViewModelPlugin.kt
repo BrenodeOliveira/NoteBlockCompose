@@ -4,10 +4,16 @@ import androidx.annotation.VisibleForTesting
 
 object ViewModelPlugin {
 
-    var factory: LiveDataFactory = DefaultLiveDataFactory()
+    var actionFactory: LiveDataFactory = DefaultLiveDataFactory()
+    var composeFactory: MutableStateFactory = DefaultMutableStateFactory()
 
     @VisibleForTesting
-    fun setFactoryPlugin(factory: LiveDataFactory) {
-        this.factory = factory
+    fun setActionFactoryPlugin(factory: LiveDataFactory) {
+        this.actionFactory = factory
+    }
+
+    @VisibleForTesting
+    fun setComposeFactoryPlugin(factory: MutableStateFactory) {
+        this.composeFactory = factory
     }
 }
