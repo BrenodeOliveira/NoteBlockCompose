@@ -1,0 +1,1 @@
+/Users/breno/Desktop/AndroidProjects/BlockNotesCompose/buildSrc/build/classes/kotlin/main/Deps.class:/Users/breno/Desktop/AndroidProjects/BlockNotesCompose/buildSrc/build/classes/kotlin/main/Versions.class
