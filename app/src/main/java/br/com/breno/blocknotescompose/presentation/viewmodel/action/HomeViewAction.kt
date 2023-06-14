@@ -1,7 +1,7 @@
 package br.com.breno.blocknotescompose.presentation.viewmodel.action
 
 import br.com.breno.blocknotescompose.data.model.NoteModel
-import core.action.UIAction
+import br.com.breno.core.action.UIAction
 
 sealed class HomeViewAction: UIAction {
     object NavigateToInsert: HomeViewAction()

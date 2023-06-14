@@ -1,9 +1,9 @@
-package core.extension
+package br.com.breno.core.extension
 
 import androidx.activity.ComponentActivity
 import androidx.compose.runtime.Composable
-import core.action.UIAction
-import core.viewmodel.ActionViewModel
+import br.com.breno.core.action.UIAction
+import br.com.breno.core.viewmodel.ActionViewModel
 
 fun ComponentActivity.onAction(
     viewModel: ActionViewModel<*>,

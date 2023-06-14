@@ -4,7 +4,7 @@ import androidx.lifecycle.viewModelScope
 import br.com.breno.blocknotescompose.data.model.NoteModel
 import br.com.breno.blocknotescompose.domain.usecase.AddNoteUseCase
 import br.com.breno.blocknotescompose.presentation.viewmodel.action.AddNoteViewAction
-import core.viewmodel.ActionViewModel
+import br.com.breno.core.viewmodel.ActionViewModel
 import kotlinx.coroutines.launch
 
 class AddNoteViewModel(private val useCase: AddNoteUseCase) : ActionViewModel<AddNoteViewAction>() {

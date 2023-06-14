@@ -1,4 +1,4 @@
-package core.rules
+package br.testing_base.rules
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

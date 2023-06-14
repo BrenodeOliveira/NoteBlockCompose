@@ -1,7 +1,7 @@
-package core.plugins
+package br.com.breno.core.plugins
 
 import androidx.lifecycle.MutableLiveData
-import core.action.UIAction
+import br.com.breno.core.action.UIAction
 
 interface LiveDataFactory {
 

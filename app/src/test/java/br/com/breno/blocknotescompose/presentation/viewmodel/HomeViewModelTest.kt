@@ -5,12 +5,13 @@ import androidx.lifecycle.Observer
 import br.com.breno.blocknotescompose.data.model.NoteModel
 import br.com.breno.blocknotescompose.domain.usecase.FetchNotesUseCase
 import br.com.breno.blocknotescompose.presentation.viewmodel.action.HomeViewAction
-import core.rules.TestCoroutineRule
-import core.rules.ViewModelTestRule
+import br.testing_base.rules.TestCoroutineRule
+import br.testing_base.rules.ViewModelTestRule
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import org.junit.Before
 import org.junit.Rule
@@ -66,5 +67,18 @@ class HomeViewModelTest {
             composeObserver.onChanged(HomeViewAction.ListNotes(listNotes))
         }
     }
+
+    @Test
+    fun `When getAllNotes has an error Should send composable of error`() {
+        // Given
+        val error = Throwable()
+        coEvery { fetchNotes() } returns flow { throw error }
+        // When
+        viewModel.getAllNotes()
+        // Then
+        verify {
+            composeObserver.onChanged(HomeViewAction.ErrorScreen(true))
+        }
+     }
 }
 

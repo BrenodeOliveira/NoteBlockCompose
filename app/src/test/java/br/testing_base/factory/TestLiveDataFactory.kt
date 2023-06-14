@@ -1,9 +1,9 @@
-package core.factory
+package br.testing_base.factory
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
-import core.action.UIAction
-import core.plugins.LiveDataFactory
+import br.com.breno.core.action.UIAction
+import br.com.breno.core.plugins.LiveDataFactory
 
 @Suppress("UNCHECKED_CAST")
 class TestLiveDataFactory(

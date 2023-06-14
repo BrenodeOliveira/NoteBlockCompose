@@ -1,4 +1,4 @@
-package core.plugins
+package br.com.breno.core.plugins
 
 import androidx.annotation.VisibleForTesting
 
@@ -8,6 +8,6 @@ object ViewModelPlugin {
 
     @VisibleForTesting
     fun setActionFactoryPlugin(factory: LiveDataFactory) {
-        this.actionFactory = factory
+        actionFactory = factory
     }
 }

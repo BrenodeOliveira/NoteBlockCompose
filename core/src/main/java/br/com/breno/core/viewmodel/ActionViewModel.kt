@@ -1,4 +1,4 @@
-package core.viewmodel
+package br.com.breno.core.viewmodel
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.State
@@ -6,9 +6,9 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import core.action.ComposableAction
-import core.action.UIAction
-import core.plugins.ViewModelPlugin
+import br.com.breno.core.action.ComposableAction
+import br.com.breno.core.action.UIAction
+import br.com.breno.core.plugins.ViewModelPlugin
 
 open class ActionViewModel<uiAction : UIAction> : ViewModel() {
     //Action with LiveData

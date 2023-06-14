@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import br.com.breno.blocknotescompose.data.model.NoteModel
 import br.com.breno.blocknotescompose.presentation.viewmodel.action.HomeViewAction
-import core.action.UIAction
+import br.com.breno.core.action.UIAction
 
 @Composable
 fun CardBlock(noteModel: NoteModel) {

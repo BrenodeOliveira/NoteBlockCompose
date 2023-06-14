@@ -4,8 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import br.com.breno.blocknotescompose.domain.usecase.AddNoteUseCase
 import br.com.breno.blocknotescompose.presentation.viewmodel.action.AddNoteViewAction
-import core.rules.TestCoroutineRule
-import core.rules.ViewModelTestRule
+import br.testing_base.rules.TestCoroutineRule
+import br.testing_base.rules.ViewModelTestRule
 import io.mockk.mockk
 import io.mockk.verify
 import org.junit.Before

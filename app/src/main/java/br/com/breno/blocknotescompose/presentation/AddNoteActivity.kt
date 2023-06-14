@@ -11,7 +11,7 @@ import br.com.breno.blocknotescompose.presentation.theme.BlockNotesComposeTheme
 import br.com.breno.blocknotescompose.presentation.ui.AddNoteContent
 import br.com.breno.blocknotescompose.presentation.viewmodel.AddNoteViewModel
 import br.com.breno.blocknotescompose.presentation.viewmodel.action.AddNoteViewAction
-import core.extension.onAction
+import br.com.breno.core.extension.onAction
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class AddNoteActivity : ComponentActivity() {

@@ -1,10 +1,10 @@
-package core.rules
+package br.testing_base.rules
 
 import androidx.lifecycle.Observer
-import core.factory.TestLiveDataFactory
-import core.action.UIAction
-import core.plugins.DefaultLiveDataFactory
-import core.plugins.ViewModelPlugin
+import br.testing_base.factory.TestLiveDataFactory
+import br.com.breno.core.action.UIAction
+import br.com.breno.core.plugins.DefaultLiveDataFactory
+import br.com.breno.core.plugins.ViewModelPlugin
 import io.mockk.mockk
 import org.junit.rules.ExternalResource
 
@@ -13,7 +13,8 @@ class ViewModelTestRule(
     actionObserver: Observer<UIAction> = mockk(),
     composeObserver: Observer<UIAction> = mockk(),
 ) : ExternalResource() {
-    private val actionFactory = TestLiveDataFactory(actionObserver, composeObserver)
+    private val actionFactory =
+        TestLiveDataFactory(actionObserver, composeObserver)
 
     fun <T : UIAction> getActionObserver(): Observer<T> {
         try {

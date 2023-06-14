@@ -3,7 +3,7 @@ package br.com.breno.blocknotescompose.presentation.viewmodel
 import androidx.lifecycle.viewModelScope
 import br.com.breno.blocknotescompose.domain.usecase.FetchNotesUseCase
 import br.com.breno.blocknotescompose.presentation.viewmodel.action.HomeViewAction
-import core.viewmodel.ActionViewModel
+import br.com.breno.core.viewmodel.ActionViewModel
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
