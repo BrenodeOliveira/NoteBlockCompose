@@ -30,6 +30,7 @@ class FetchNotesUseCaseTest {
         coroutineRule.runBlockingTest {
             val result = useCase()
 
+            // Then
             assertEquals(noteModel, result.first())
         }
      }

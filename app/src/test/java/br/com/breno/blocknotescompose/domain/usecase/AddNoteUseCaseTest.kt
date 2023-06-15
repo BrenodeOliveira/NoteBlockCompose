@@ -29,6 +29,7 @@ class AddNoteUseCaseTest {
         coroutineRule.runBlockingTest {
             val result = useCase.invoke(noteModel)
 
+            // Then
             assertEquals(long, result)
         }
      }
