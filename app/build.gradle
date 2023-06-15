@@ -50,6 +50,7 @@ android {
 
 dependencies {
 
+    implementation Deps.work_runtime
     implementation Deps.android_core
     implementation Deps.lifecycle
     implementation Deps.compose_activity

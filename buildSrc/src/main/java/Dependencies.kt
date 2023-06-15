@@ -4,6 +4,7 @@ object Versions {
     const val composeActivity = "1.7.2"
     const val androidCore = "1.10.1"
     const val lifecycle = "2.6.1"
+    const val workRuntimeVersion = "2.7.1"
     const val roomVersion = "2.4.3"
     const val junitVersion = "4.13.2"
     const val extJunitVersion = "1.1.5"
@@ -26,6 +27,7 @@ object Deps {
     const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.stdlibVersion}"
     const val liveDataLifeCycle = "androidx.lifecycle:lifecycle-livedata-core-ktx:${Versions.lifecycle}"
+    const val work_runtime = "androidx.work:work-runtime:${Versions.workRuntimeVersion}"
 
     // Koin
     const val koin_core = "io.insert-koin:koin-core:${Versions.koinVersion}"
