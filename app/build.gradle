@@ -77,4 +77,5 @@ dependencies {
 
     // App modules
     implementation project(":core")
+    testImplementation project(":core:testing-base")
 }
