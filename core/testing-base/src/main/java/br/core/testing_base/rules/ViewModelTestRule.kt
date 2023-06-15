@@ -1,7 +1,7 @@
-package br.testing_base.rules
+package br.core.testing_base.rules
 
 import androidx.lifecycle.Observer
-import br.testing_base.factory.TestLiveDataFactory
+import br.core.testing_base.factory.TestLiveDataFactory
 import br.com.breno.core.action.UIAction
 import br.com.breno.core.plugins.DefaultLiveDataFactory
 import br.com.breno.core.plugins.ViewModelPlugin

@@ -1,4 +1,4 @@
-package br.testing_base.factory
+package br.core.testing_base.factory
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
