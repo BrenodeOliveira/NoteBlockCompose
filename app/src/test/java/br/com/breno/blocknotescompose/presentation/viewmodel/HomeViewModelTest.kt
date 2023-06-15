@@ -5,8 +5,8 @@ import androidx.lifecycle.Observer
 import br.com.breno.blocknotescompose.data.model.NoteModel
 import br.com.breno.blocknotescompose.domain.usecase.FetchNotesUseCase
 import br.com.breno.blocknotescompose.presentation.viewmodel.action.HomeViewAction
-import br.testing_base.rules.TestCoroutineRule
-import br.testing_base.rules.ViewModelTestRule
+import br.core.testing_base.rules.TestCoroutineRule
+import br.core.testing_base.rules.ViewModelTestRule
 import io.mockk.coEvery
 import io.mockk.mockk
 import io.mockk.verify

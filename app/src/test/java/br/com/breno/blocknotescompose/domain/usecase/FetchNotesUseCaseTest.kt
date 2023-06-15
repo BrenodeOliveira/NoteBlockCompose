@@ -2,7 +2,7 @@ package br.com.breno.blocknotescompose.domain.usecase
 
 import br.com.breno.blocknotescompose.data.model.NoteModel
 import br.com.breno.blocknotescompose.domain.repository.FetchNotesRepository
-import br.testing_base.rules.TestCoroutineRule
+import br.core.testing_base.rules.TestCoroutineRule
 import io.mockk.coEvery
 import io.mockk.mockk
 import junit.framework.TestCase.assertEquals
