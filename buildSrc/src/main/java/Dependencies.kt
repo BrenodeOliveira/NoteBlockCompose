@@ -25,6 +25,7 @@ object Deps {
     const val android_core = "androidx.core:core-ktx:${Versions.androidCore}"
     const val lifecycle = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     const val stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk8:${Versions.stdlibVersion}"
+    const val liveDataLifeCycle = "androidx.lifecycle:lifecycle-livedata-core-ktx:${Versions.lifecycle}"
 
     // Koin
     const val koin_core = "io.insert-koin:koin-core:${Versions.koinVersion}"
