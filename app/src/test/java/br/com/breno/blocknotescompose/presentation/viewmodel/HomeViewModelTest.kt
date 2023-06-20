@@ -24,10 +24,7 @@ class HomeViewModelTest {
     val testInstantTaskExecutorRule: TestRule = InstantTaskExecutorRule()
 
     @get:Rule
-    val viewModelTestRule = ViewModelTestRule(
-        actionObserver = mockk(relaxed = true),
-        composeObserver = mockk(relaxed = true)
-    )
+    val viewModelTestRule = ViewModelTestRule()
 
     @get:Rule
     val coroutineRule = TestCoroutineRule()

@@ -10,8 +10,8 @@ import org.junit.rules.ExternalResource
 
 @Suppress("UNCHECKED_CAST")
 class ViewModelTestRule(
-    actionObserver: Observer<UIAction> = mockk(),
-    composeObserver: Observer<UIAction> = mockk(),
+    actionObserver: Observer<UIAction> = mockk(relaxed = true),
+    composeObserver: Observer<UIAction> = mockk(relaxed = true),
 ) : ExternalResource() {
     private val actionFactory =
         TestLiveDataFactory(actionObserver, composeObserver)
