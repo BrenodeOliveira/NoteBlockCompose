@@ -41,7 +41,7 @@ class HomeViewModelTest {
     }
 
     @Test
-    fun `When Navigate to insert is tapped Should send action to navigate`() {
+    fun `navigateToInsert Should send action to navigate When is calle`() {
         // When
         viewModel.navigateToInsert()
         // Then
